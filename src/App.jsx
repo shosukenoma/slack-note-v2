@@ -10,12 +10,24 @@ function App() {
   function addPost() {
     if (newPost === "") return
     const date = new Date;
+    let day = dateCreated.getDate();
+    let month = dateCreated.getMonth() + 1;
+    let year = dateCreated.getFullYear();
+    let hours = dateCreated.getHours();
+    let minutes = dateCreated.getMinutes();
+    let suffix = "AM"
+    
+    if (hours > 12) {
+      hours = hours - 12
+      suffix = "PM"
+    }
+    
     setPostList(currentPostList => {
       return [...currentPostList, {
         id: crypto.randomUUID(),
         content: newPost,
         isPinned: false,
-        dateCreated: date,
+        dateCreated: `${hours}:${minutes} ${suffix}`,
         thread: []
       }]
     })
