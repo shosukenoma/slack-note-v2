@@ -65,3 +65,20 @@
 .post-list {
   list-style: none;
 }
+
+@media (max-width: 600px) {
+  .app-container {
+    max-width: 160em;
+    max-height: 100vh;
+    height: 100vh;
+    margin: 0 auto;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .thread-container {
+    display: none;
+  }
+}
