@@ -1,10 +1,49 @@
-.post-list {
-  list-style: none;
+.app-container {
+  max-width: 160rem;
+  height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.feed-container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.input-container {
+  background-color: #232529;
+  padding: 1rem;
+  margin: 2rem;
+  border: 1px solid #5A5C5A;
+  border-radius: 6px;
+  display: flex;
+  gap: 1rem;
+}
+
+.input-box {
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  outline: none;
+  border: none;
 }
 
 .btn--send {
   background-color: #007A5A;
-  color: white;
+  color: #fff;
   border: 1px solid #fff;
   border-radius: 4px;
+  padding: .5rem 1rem;
+}
+
+.thread-container {
+  border-left: solid 2px #5A5C5A;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-list {
+  list-style: none;
 }
