@@ -28,17 +28,31 @@
 }
 
 .user-icon {
+  grid-column: 1;
+  grid-row: 1 / -1;
   width: 3.6rem;
   height: 3.6rem;
   border-radius: 4px;
-  grid-column: 1;
-  grid-row: 1 / -1;
+}
+
+.flex-container {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 0.7rem;
 }
 
 .user-name {
   font-weight: bold;
   font-size: 1.6rem;
-  line-height: 1.2;
+  /* line-height: 1.2; */
+}
+
+.post-time {
+  font-weight: normal;
+  font-size: 1.2rem;
+  color: #777;
+  align-self: flex-end;
 }
 
 .post-text {
