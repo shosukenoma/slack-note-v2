@@ -81,4 +81,8 @@
   .thread-container {
     display: none;
   }
+
+  .text-box {
+    font-size: 18px;
+  }
 }
