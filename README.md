@@ -1,1 +1,1 @@
-Deploy: https://dev.to/rashidshamloo/deploying-vite-react-app-to-github-pages-35hf
+Deployed on https://shosukenoma.github.io/slack-note-v2/
