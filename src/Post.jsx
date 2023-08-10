@@ -12,7 +12,7 @@ function Post({ id, content, isPinned, deletePost, togglePin, dateCreated }) {
   // if (minutes < 10) {
   //   minutes = "0" + minutes 
   // }
-  if (hours > 12) {
+  if (hours >= 12) {
     hours = hours - 12
     suffix = "PM"
   }
