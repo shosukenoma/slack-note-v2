@@ -18,6 +18,12 @@ function App() {
       }]
     })
     setNewPost("")
+    
+    /* The updateScroll() function always runs faster than 
+    the adding of a new post, so we use a delayed timer here. */
+    setTimeout(() => {
+      updateScroll()
+    }, 1)
   }
 
   function handleEnter(e) {
@@ -41,9 +47,17 @@ function App() {
     })
   }
 
+  /* Special function for pin scrolling to bottom */
+  /* https://stackoverflow.com/a/21067431/21966800 */
+  function updateScroll(){
+    /* This HAS TO BE getElementById. Class doesn't work. */
+    var element = document.getElementById("post-container");
+    element.scrollTop = element.scrollHeight;
+  }
+
   return (
     <div className="app-container">
-      <div className="post-container">
+      <div className="post-container" id="post-container">
         <ul className="post-list">
           {postList.map(post => {
             return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)

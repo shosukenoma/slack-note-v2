@@ -16,6 +16,7 @@
   grid-row: 1;
 
   overflow: scroll;
+  overflow-anchor: none;
 }
 
 .input-container {
