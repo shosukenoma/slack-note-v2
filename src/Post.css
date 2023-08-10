@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.post:hover {
+  background-color: #232529;
+}
+
 .post.pinned {
   background-color: #302E26;
 }
