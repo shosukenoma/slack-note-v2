@@ -43,16 +43,16 @@ function App() {
 
   return (
     <div className="app-container">
-      <div className="feed-container">
-        <div className="post-container">
-          <ul className="post-list">
-            {postList.map(post => {
-              return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
-            })}
-          </ul>
-        </div>
-        <div className="input-container">
-          <input class="input-box" type="text" placeholder="Jot something down" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+      <div className="post-container">
+        <ul className="post-list">
+          {postList.map(post => {
+            return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
+          })}
+        </ul>
+      </div>
+      <div className="input-container">
+        <div className="text-box-container">
+          <input class="text-box" type="text" placeholder="Jot something down" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send" onClick={addPost}>Send</button>
         </div>
       </div>
