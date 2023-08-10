@@ -1,3 +1,10 @@
 .post-list {
   list-style: none;
 }
+
+.btn--send {
+  background-color: #007A5A;
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}

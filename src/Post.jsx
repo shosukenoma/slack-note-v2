@@ -1,10 +1,13 @@
-import React from 'react'
+import { React } from 'react'
+import './Post.css'
 
-function Post({ id, content, deletePost}) {
+function Post({ id, content, isPinned, deletePost, togglePin }) {
+
   return (
-    <li>
+    <li className={`post ${isPinned ? "pinned" : ""}`}>
       <span>{content}</span>
-      <button onClick={() => deletePost(id)}>Delete</button>
+      <button className="btn--delete" onClick={() => deletePost(id)}>Delete</button>
+      <button className="btn--pin" onClick={() => togglePin(id, isPinned)}>{isPinned ? "Unpin" : "Pin"}</button>
     </li>
   )
 }

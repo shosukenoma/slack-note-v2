@@ -13,17 +13,11 @@ function App() {
       return [...currentPostList, {
         id: crypto.randomUUID(),
         content: newPost,
-        pinned: false,
+        isPinned: false,
         thread: []
       }]
     })
     setNewPost("")
-  }
-
-  function deletePost(id) {
-    setPostList(currentPostList => {
-      return currentPostList.filter(post => post.id !== id)
-    })
   }
 
   function handleEnter(e) {
@@ -32,11 +26,26 @@ function App() {
     }
   }
 
+  function deletePost(id) {
+    setPostList(currentPostList => {
+      return currentPostList.filter(post => post.id !== id)
+    })
+  }
+
+  function togglePin(id, isPinned) {
+    setPostList(currentPostList => {
+      return currentPostList.map(post => {
+        if (post.id === id) return { ...post, isPinned: !isPinned }
+        return post
+      })
+    })
+  }
+
   return (
     <div className="container">
       <ul className="post-list">
         {postList.map(post => {
-          return (<Post key={post.id} {...post} deletePost={deletePost}></Post>)
+          return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
         })}
       </ul>
       <div>
