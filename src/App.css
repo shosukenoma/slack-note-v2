@@ -28,9 +28,15 @@
   grid-column: 2;
   grid-row: 1 / -1;
   border-left: solid 2px #5A5C5A;
+  padding: 3rem;
+
   display: grid;
   justify-content: center;
   align-items: center;
+}
+
+.thread-container p {
+  margin: 0 auto;
 }
 
 /* Layer 2 */
