@@ -52,7 +52,7 @@ function App() {
           </ul>
         </div>
         <div className="input-container">
-          <input class="input-box" type="text" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+          <input class="input-box" type="text" placeholder="Jot something down" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send" onClick={addPost}>Send</button>
         </div>
       </div>
