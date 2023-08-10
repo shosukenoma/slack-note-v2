@@ -1,14 +1,13 @@
 import { React } from 'react'
 import './Post.css'
 
-function Post({ id, content, isPinned, deletePost, togglePin }) {
+function Post({ id, content, isPinned, deletePost, togglePin, dateCreated }) {
 
-  const date = new Date;
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
+  let day = dateCreated.getDate();
+  let month = dateCreated.getMonth() + 1;
+  let year = dateCreated.getFullYear();
+  let hours = dateCreated.getHours();
+  let minutes = dateCreated.getMinutes();
   let suffix = "AM"
   if (hours > 12) {
     hours = hours - 12

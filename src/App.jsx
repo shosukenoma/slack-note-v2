@@ -9,11 +9,13 @@ function App() {
 
   function addPost() {
     if (newPost === "") return
+    const date = new Date;
     setPostList(currentPostList => {
       return [...currentPostList, {
         id: crypto.randomUUID(),
         content: newPost,
         isPinned: false,
+        dateCreated: date,
         thread: []
       }]
     })
