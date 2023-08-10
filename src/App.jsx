@@ -26,6 +26,12 @@ function App() {
     })
   }
 
+  function handleEnter(e) {
+    if (e.key=='Enter') {
+      addPost()
+    }
+  }
+
   return (
     <div className="container">
       <ul className="post-list">
@@ -34,8 +40,8 @@ function App() {
         })}
       </ul>
       <div>
-        <input type="text" value={newPost} onChange={e => setNewPost(e.target.value)}/>
-        <button onClick={addPost}>Send</button>
+        <input type="text" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+        <button className="btn--send" onClick={addPost}>Send</button>
       </div>
     </div>
   )
