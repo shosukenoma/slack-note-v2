@@ -42,15 +42,22 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <ul className="post-list">
-        {postList.map(post => {
-          return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
-        })}
-      </ul>
-      <div>
-        <input type="text" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
-        <button className="btn--send" onClick={addPost}>Send</button>
+    <div className="app-container">
+      <div className="feed-container">
+        <div className="post-container">
+          <ul className="post-list">
+            {postList.map(post => {
+              return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
+            })}
+          </ul>
+        </div>
+        <div className="input-container">
+          <input class="input-box" type="text" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+          <button className="btn--send" onClick={addPost}>Send</button>
+        </div>
+      </div>
+      <div className="thread-container">
+        <p>Threads feature coming soon...</p>
       </div>
     </div>
   )
