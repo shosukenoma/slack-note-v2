@@ -2,11 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import Post from './Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+import { useLocalStorage } from './useLocalStorage';
 
 function App() {
 
   const [newPost, setNewPost] = useState("")
-  const [postList, setPostList] = useState([])
+  const [postList, setPostList] = useLocalStorage("postList", [])
 
   function addPost() {
     if (newPost === "") return
@@ -16,7 +17,12 @@ function App() {
         id: crypto.randomUUID(),
         content: newPost,
         isPinned: false,
-        dateCreated: date,
+        dateCreated: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          hours: date.getHours(),
+          minutes: date.getMinutes()},
         thread: []
       }]
     })
@@ -69,7 +75,7 @@ function App() {
       </div>
       <div className="input-container">
         <div className="text-box-container">
-        <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+          <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send" onClick={addPost}>Send</button>
         </div>
       </div>

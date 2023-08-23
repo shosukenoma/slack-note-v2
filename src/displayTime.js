@@ -1,8 +1,8 @@
-export function displayTime(hours, minutes) {
+export function displayTime(date) {
 
-  const suffix = (hours < 12) ? "AM" : "PM"
-  hours = (hours <= 12) ? hours : hours - 12
-  const timeString = `${hours}:${(minutes >= 10) ? minutes : "0"+minutes} ${suffix}`
+  const suffix = (date.hours < 12) ? "AM" : "PM"
+  const adjustedHours = (date.hours <= 12) ? date.hours : date.hours - 12
+  const timeString = `${adjustedHours}:${(date.minutes >= 10) ? date.minutes : "0"+date.minutes} ${suffix}`
 
   return timeString
 }
