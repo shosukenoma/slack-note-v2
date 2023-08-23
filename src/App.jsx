@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Post from './Post'
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 
 function App() {
 
@@ -68,7 +69,7 @@ function App() {
       </div>
       <div className="input-container">
         <div className="text-box-container">
-          <input class="text-box" type="text" placeholder="Jot something down" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+        <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send" onClick={addPost}>Send</button>
         </div>
       </div>
