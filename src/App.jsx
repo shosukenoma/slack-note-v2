@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Post from './Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
@@ -8,6 +8,13 @@ function App() {
 
   const [newPost, setNewPost] = useState("")
   const [postList, setPostList] = useLocalStorage("postList", [])
+
+  /* Scroll to bottom upon 
+      a) first render
+      b) adding new post */
+  useEffect(() => {
+    updateScroll()
+  }, [postList])
 
   function addPost() {
     if (newPost === "") return
@@ -28,11 +35,12 @@ function App() {
     })
     setNewPost("")
     
-    /* The updateScroll() function always runs faster than 
-    the adding of a new post, so we use a delayed timer here. */
-    setTimeout(() => {
-      updateScroll()
-    }, 1)
+    /* Changed to useEffect but keeping it for future reference. */
+    // /* The updateScroll() function always runs faster than 
+    // the adding of a new post, so we use a delayed timer here. */
+    // setTimeout(() => {
+    //   updateScroll()
+    // }, 1)
   }
 
   function handleEnter(e) {
