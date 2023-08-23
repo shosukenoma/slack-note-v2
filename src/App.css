@@ -54,10 +54,12 @@
 
 .text-box {
   width: 100%;
+  /* height: auto; */
   background-color: inherit;
   color: inherit;
   outline: none;
   border: none;
+  resize: none;
 }
 
 .btn--send {

@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Post from './Post'
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
+import { useLocalStorage } from './useLocalStorage';
 
 function App() {
 
   const [newPost, setNewPost] = useState("")
-  const [postList, setPostList] = useState([])
+  const [postList, setPostList] = useLocalStorage("postList", [])
+
+  /* Scroll to bottom upon 
+      a) first render
+      b) adding new post */
+  useEffect(() => {
+    updateScroll()
+  }, [postList])
 
   function addPost() {
     if (newPost === "") return
@@ -15,17 +24,23 @@ function App() {
         id: crypto.randomUUID(),
         content: newPost,
         isPinned: false,
-        dateCreated: date,
+        dateCreated: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          hours: date.getHours(),
+          minutes: date.getMinutes()},
         thread: []
       }]
     })
     setNewPost("")
     
-    /* The updateScroll() function always runs faster than 
-    the adding of a new post, so we use a delayed timer here. */
-    setTimeout(() => {
-      updateScroll()
-    }, 1)
+    /* Changed to useEffect but keeping it for future reference. */
+    // /* The updateScroll() function always runs faster than 
+    // the adding of a new post, so we use a delayed timer here. */
+    // setTimeout(() => {
+    //   updateScroll()
+    // }, 1)
   }
 
   function handleEnter(e) {
@@ -68,7 +83,7 @@ function App() {
       </div>
       <div className="input-container">
         <div className="text-box-container">
-          <input class="text-box" type="text" placeholder="Jot something down" value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
+          <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send" onClick={addPost}>Send</button>
         </div>
       </div>

@@ -1,24 +1,8 @@
 import { React } from 'react'
 import './Post.css'
+import { displayTime } from './displayTime';
 
-function Post({ id, content, isPinned, deletePost, togglePin, dateCreated }) {
-
-  let day = dateCreated.getDate();
-  let month = dateCreated.getMonth() + 1;
-  let year = dateCreated.getFullYear();
-  let hours = dateCreated.getHours();
-  let minutes = dateCreated.getMinutes();
-  let suffix = "AM"
-  // if (minutes < 10) {
-  //   minutes = "0" + minutes 
-  // }
-  if (hours > 12) {
-    hours = hours - 12
-  }
-  if (hours >= 12) {
-    suffix = "PM"
-  }
-  
+function Post({ id, content, isPinned, dateCreated, deletePost, togglePin }) {
 
   return (
     <div className="post-outer-box">
@@ -27,7 +11,7 @@ function Post({ id, content, isPinned, deletePost, togglePin, dateCreated }) {
           <img className="user-icon" src="https://a.slack-edge.com/80588/marketing/img/avatars/slackbot/avatar-slackbot@2x.png" alt="Slackbot Icon" />
           <div className="flex-container">
             <p className="user-name">You</p>
-            <span className="post-time">{`${hours}:${(minutes < 10) ? "0"+minutes : minutes} ${suffix}`}</span>
+            <span className="post-time">{displayTime(dateCreated)}</span>
           </div>
           <p className="post-text">{content}</p>
         </div>
