@@ -17,7 +17,13 @@ function App() {
   }, [])
 
   function addPost() {
-    if (newPost === "") return
+    if (newPost === "") {
+      setTimeout(() => {
+        setNewPost("")
+      }, 0.1)
+      
+      return
+    }
     const date = new Date;
     setPostList(currentPostList => {
       return [...currentPostList, {
