@@ -16,6 +16,10 @@
   width: 100%;
   background-color: #232529;
   padding: 1.2rem 2.0rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .title {
@@ -23,6 +27,19 @@
   justify-self: center;
 }
 
+.nav-list {
+  list-style: none;
+}
+
+.btn--github {
+  text-decoration: none;
+  color: inherit;
+  align-self: center;
+}
+
+.devicon-github-original {
+  font-size: 3.6rem;
+}
 /* Layer 1 */
 .post-container {
   grid-column: 1;

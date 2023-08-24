@@ -84,6 +84,11 @@ function App() {
     <div className="app-container">
       <header className="header">
         <h2 className="title">Slack Note</h2>
+        <nav className="nav">
+          <ul className="nav-list">
+            <li><a href="https://github.com/shosukenoma/slack-note-v2" className="btn--github" target='blank'><i class="devicon-github-original"></i></a></li>
+          </ul>
+        </nav>
       </header>
       <div className="post-container" id="post-container">
         <ul className="post-list">
