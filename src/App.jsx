@@ -33,7 +33,14 @@ function App() {
         thread: []
       }]
     })
-    setNewPost("")
+
+    /* Delay textfield reset:
+        1) New line created by enter key
+        2) Empty textfield
+    */
+    setTimeout(() => {
+      setNewPost("")
+    }, 0.1)
     
     /* Changed to useEffect but keeping it for future reference. */
     // /* The updateScroll() function always runs faster than 
@@ -43,6 +50,7 @@ function App() {
     // }, 1)
   }
 
+  /* Used in junction with `onKeyDown={handleEnter}`*/
   function handleEnter(e) {
     if (e.key=='Enter') {
       addPost()
@@ -82,10 +90,10 @@ function App() {
         </ul>
       </div>
       <div className="input-container">
-        <div className="text-box-container">
+        <form className="text-box-container" onSubmit={addPost}>
           <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
-          <button className="btn--send" onClick={addPost}>Send</button>
-        </div>
+          <button className="btn--send">Send</button>
+        </form>
       </div>
       <div className="thread-container">
         <p>Threads feature coming soon...</p>
