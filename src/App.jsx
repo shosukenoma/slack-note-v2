@@ -14,7 +14,7 @@ function App() {
       b) adding new post */
   useEffect(() => {
     updateScroll()
-  }, [postList])
+  }, [])
 
   function addPost() {
     if (newPost === "") return
@@ -42,12 +42,11 @@ function App() {
       setNewPost("")
     }, 0.1)
     
-    /* Changed to useEffect but keeping it for future reference. */
-    // /* The updateScroll() function always runs faster than 
-    // the adding of a new post, so we use a delayed timer here. */
-    // setTimeout(() => {
-    //   updateScroll()
-    // }, 1)
+    /* The updateScroll() function always runs faster than 
+    the adding of a new post, so we use a delayed timer here. */
+    setTimeout(() => {
+      updateScroll()
+    }, 1)
   }
 
   /* Used in junction with `onKeyDown={handleEnter}`*/
