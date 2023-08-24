@@ -7,13 +7,26 @@
   
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: 100%;
+  background-color: #232529;
+  padding: 1.2rem 2.0rem;
+}
+
+.title {
+  text-align: center;
+  justify-self: center;
 }
 
 /* Layer 1 */
 .post-container {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
 
   overflow: scroll;
   overflow-anchor: none;
@@ -21,12 +34,12 @@
 
 .input-container {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .thread-container {
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 2 / -1;
   border-left: solid 2px #5A5C5A;
   padding: 3rem;
 

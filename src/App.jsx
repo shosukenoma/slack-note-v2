@@ -82,6 +82,9 @@ function App() {
 
   return (
     <div className="app-container">
+      <header className="header">
+        <h2 className="title">Slack Note</h2>
+      </header>
       <div className="post-container" id="post-container">
         <ul className="post-list">
           {postList.map(post => {
