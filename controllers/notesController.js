@@ -1,29 +1,12 @@
 const Note = require("../models/notesModel");
-const asyncWrapper = require("express-async-wrap");
+const factory = require("./handlerFactory");
 
-const getAllNotes = asyncWrapper(async (req, res, next) => {
-  const allNotes = await Note.find({});
-  res.status(200).json({ allNotes });
-  next();
-});
+const getAllNotes = factory.getAllDocuments(Note);
 
-const createNote = asyncWrapper(async (req, res, next) => {
-  const newNote = await Note.create(req.body);
-  res.status(200).json({ newNote });
-  next();
-});
+const createNote = factory.createDocument(Note);
 
-const deleteNote = asyncWrapper(async (req, res, next) => {
-  await Note.findByIdAndDelete(req.params.id);
-  res.status(200).json({ note: null, status: "success" });
-  next();
-});
+const deleteNote = factory.deleteDocument(Note);
 
-const updateNote = asyncWrapper(async (req, res, next) => {
-  const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-  res.status(200).json({ updatedNote });
-});
+const updateNote = factory.updateDocument(Note);
 
 module.exports = { createNote, getAllNotes, deleteNote, updateNote };
