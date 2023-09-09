@@ -1,7 +1,6 @@
-const Note = require("../models/notesModel");
 const asyncWrapper = require("express-async-wrap");
 
-const getAllNotes = asyncWrapper(async (req, res, next) => {
+const getAll(model) = asyncWrapper(async (req, res, next) => {
   const allNotes = await Note.find({});
   res.status(200).json({ allNotes });
   next();
