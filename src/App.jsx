@@ -3,7 +3,7 @@ import './App.css'
 import Post from './Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import axios from 'axios';
-import { displayTime } from './displayTime';
+import asyncWrapper from 'express-async-wrap';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         b) adding new post */
     useEffect(() => {
       updateScroll()
-      fetchData()
+      // fetchData()
     }, [])
   
   function addPost(event) {  
@@ -30,8 +30,25 @@ function App() {
         return
       }
     
-      displayNewPost(newPost)
-      
+      const date = new Date;
+      let post = {
+        id: crypto.randomUUID(),
+        content: newPost,
+        isPinned: false,
+        dateCreated: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          hours: date.getHours(),
+          minutes: date.getMinutes()},
+        thread: []
+      }
+
+      setPostList(currentPostList => {
+        return [...currentPostList, post ]
+      })
+   
+      handleSubmit(post)
       /* Delay textfield reset:
           1) New line created by enter key
           2) Empty textfield
@@ -47,43 +64,31 @@ function App() {
       }, 1)
       
   }
+  
+  async function handleSubmit(post){ 
+    try{const {content,isPinned,dateCreated} = post
+    await axios.post('/api/v1/posts',{content,isPinned,dateCreated})}
+    catch(error){console.log(error)}}
+    
 
-  function displayNewPost(message) {
-    const date = new Date;
-      setPostList(currentPostList => {
-        return [...currentPostList, {
-          id: crypto.randomUUID(),
-          content: message,
-          isPinned: false,
-          dateCreated: {
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate(),
-            hours: date.getHours(),
-            minutes: date.getMinutes()},
-          thread: []
-        }]
-      })
-  }
+  // async function fetchData(){ asyncWrapper(const {data} = await axios.get("/api/v1/posts")
 
-  const handleSubmit = async(newPost) => {
-    try {
-    const response = await axios.post('/api/v1/notes',{message:newPost})
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }} 
-
-  async function fetchData(){
-    try {
-      const {data} = await axios.get("/api/v1/notes")
-      // console.log(data.allDocuments)
-      data.allDocuments.forEach(post => console.log(post.message))
-      console.log(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     data.allDocuments.forEach(post => setPostList(currentPostList => {
+  //       setPostList(currentPostList => {
+  //         return [...currentPostList, {
+  //           content,
+  //           isPinned,
+  //           dateCreated
+  //         }]
+  //       })}))
+    
+      
+          
+  //     console.log(data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  
 
   /* Used in junction with `onKeyDown={handleEnter}`*/
   function handleEnter(e) {
