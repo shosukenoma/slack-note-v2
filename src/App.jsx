@@ -16,7 +16,7 @@ function App() {
         b) adding new post */
     useEffect(() => {
       updateScroll()
-      // fetchData()
+      fetchData()
     }, [])
   
   function addPost(event) {  
@@ -71,24 +71,24 @@ function App() {
     catch(error){console.log(error)}}
     
 
-  // async function fetchData(){ asyncWrapper(const {data} = await axios.get("/api/v1/posts")
-
-  //     data.allDocuments.forEach(post => setPostList(currentPostList => {
-  //       setPostList(currentPostList => {
-  //         return [...currentPostList, {
-  //           content,
-  //           isPinned,
-  //           dateCreated
-  //         }]
-  //       })}))
-    
-      
-          
-  //     console.log(data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  
+  async function fetchData(){ 
+    try {
+      const {data} = await axios.get("/api/v1/posts")
+      data.allDocuments.
+      forEach(post => {
+        const {content,isPinned,dateCreated} = post
+        setPostList(currentPostList => {
+          return [...currentPostList, {
+            content,
+            isPinned,
+            dateCreated
+          }]
+        })
+  })}
+     catch (error) {
+      console.log(error)
+    }
+  }
 
   /* Used in junction with `onKeyDown={handleEnter}`*/
   function handleEnter(e) {
