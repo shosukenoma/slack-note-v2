@@ -3,6 +3,7 @@ import './App.css'
 import Post from './Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import axios from 'axios';
+import { displayTime } from './displayTime';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         b) adding new post */
     useEffect(() => {
       updateScroll()
+      fetchData()
     }, [])
   
   function addPost(event) {  
@@ -27,22 +29,9 @@ function App() {
         
         return
       }
-      const date = new Date;
-      setPostList(currentPostList => {
-        return [...currentPostList, {
-          id: crypto.randomUUID(),
-          content: newPost,
-          isPinned: false,
-          dateCreated: {
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate(),
-            hours: date.getHours(),
-            minutes: date.getMinutes()},
-          thread: []
-        }]
-      })
-  
+    
+      displayNewPost(newPost)
+      
       /* Delay textfield reset:
           1) New line created by enter key
           2) Empty textfield
@@ -59,6 +48,24 @@ function App() {
       
   }
 
+  function displayNewPost(message) {
+    const date = new Date;
+      setPostList(currentPostList => {
+        return [...currentPostList, {
+          id: crypto.randomUUID(),
+          content: message,
+          isPinned: false,
+          dateCreated: {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate(),
+            hours: date.getHours(),
+            minutes: date.getMinutes()},
+          thread: []
+        }]
+      })
+  }
+
   const handleSubmit = async(newPost) => {
     try {
     const response = await axios.post('/api/v1/notes',{message:newPost})
@@ -67,16 +74,16 @@ function App() {
     console.log(error)
   }} 
 
-  const fetchData = async()=>{
+  async function fetchData(){
     try {
       const {data} = await axios.get("/api/v1/notes")
-      data.map(post => addPost())
+      // console.log(data.allDocuments)
+      data.allDocuments.forEach(post => console.log(post.message))
       console.log(data)
     } catch (error) {
       console.log(error)
     }
   }
-  
 
   /* Used in junction with `onKeyDown={handleEnter}`*/
   function handleEnter(e) {
