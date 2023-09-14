@@ -19,9 +19,8 @@ function App() {
       fetchData()
     }, [])
   
-  function addPost(event) {  
+  function addPost(post) {  
 
-    event.preventDefault()
       if (newPost === "") {
         setTimeout(() => {
           setNewPost("")
@@ -29,26 +28,11 @@ function App() {
         
         return
       }
-    
-      const date = new Date;
-      let post = {
-        id: crypto.randomUUID(),
-        content: newPost,
-        isPinned: false,
-        dateCreated: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate(),
-          hours: date.getHours(),
-          minutes: date.getMinutes()},
-        thread: []
-      }
-
+      
       setPostList(currentPostList => {
-        return [...currentPostList, post ]
+        return [...currentPostList, post]
       })
    
-      handleSubmit(post)
       /* Delay textfield reset:
           1) New line created by enter key
           2) Empty textfield
@@ -65,9 +49,24 @@ function App() {
       
   }
   
-  async function handleSubmit(post){ 
-    try{const {content,isPinned,dateCreated} = post
-    await axios.post('/api/v1/posts',{content,isPinned,dateCreated})}
+  async function handleSubmit(e){ 
+    e.preventDefault()
+    try{
+    const date = new Date;
+      let post = {
+        content: newPost,
+        isPinned: false,
+        dateCreated: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate(),
+          hours: date.getHours(),
+          minutes: date.getMinutes()},
+        thread: []
+      }
+    const {data} = await axios.post('/api/v1/posts',post)
+    addPost(data.newDocument)
+  }
     catch(error){console.log(error)}}
     
 
@@ -76,15 +75,16 @@ function App() {
       const {data} = await axios.get("/api/v1/posts")
       data.allDocuments.
       forEach(post => {
-        const {content,isPinned,dateCreated} = post
+        const {content,isPinned,dateCreated,_id:id} = post
         setPostList(currentPostList => {
           return [...currentPostList, {
             content,
             isPinned,
-            dateCreated
+            dateCreated,id
           }]
         })
-  })}
+  })
+}
      catch (error) {
       console.log(error)
     }
@@ -97,7 +97,8 @@ function App() {
     }
   }
 
-  function deletePost(id) {
+  async function deletePost(id) {
+    await axios.delete(`/api/v1/posts/${id}`)
     setPostList(currentPostList => {
       return currentPostList.filter(post => post.id !== id)
     })
@@ -133,12 +134,12 @@ function App() {
       <div className="post-container" id="post-container">
         <ul className="post-list">
           {postList.map(post => {
-            return (<Post key={post.id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
+            return (<Post key={post._id} {...post} deletePost={deletePost} togglePin={togglePin}/>)
           })}
         </ul>
       </div>
       <div className="input-container">
-        <form className="text-box-container" onSubmit={addPost}>
+        <form className="text-box-container" onSubmit={handleSubmit}>
           <TextareaAutosize className="text-box" placeholder="Jot something down" maxRows={19} value={newPost} onChange={e => setNewPost(e.target.value)} onKeyDown={handleEnter}/>
           <button className="btn--send">Send</button>
         </form>
