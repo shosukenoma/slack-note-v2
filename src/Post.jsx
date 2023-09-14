@@ -2,6 +2,7 @@ import { React } from 'react'
 import './Post.css'
 import { displayTime } from './displayTime';
 
+
 function Post({ id, content, isPinned, dateCreated, deletePost, togglePin }) {
 
   return (
