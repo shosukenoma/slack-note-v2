@@ -3,8 +3,6 @@ import './App.css'
 import Post from './Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import axios from 'axios';
-import asyncWrapper from 'express-async-wrap';
-
 
 function App() {
 
@@ -49,6 +47,7 @@ function App() {
       
   }
   
+  /*creates new post in database and renders the post*/
   async function handleSubmit(e){ 
     e.preventDefault()
     try{
@@ -69,7 +68,7 @@ function App() {
   }
     catch(error){console.log(error)}}
     
-
+  /*Loads all of the user's posts*/ 
   async function fetchData(){ 
     try {
       const {data} = await axios.get("/api/v1/posts")
@@ -104,7 +103,8 @@ function App() {
     })
   }
 
-  function togglePin(id, isPinned) {
+  async function togglePin(id, isPinned) {
+    await axios.patch(`/api/v1/posts/${id}`,{isPinned:!isPinned})
     setPostList(currentPostList => {
       return currentPostList.map(post => {
         if (post.id === id) return { ...post, isPinned: !isPinned }

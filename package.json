@@ -8,6 +8,7 @@
     "dev:frontend": "vite",
     "dev:backend": "nodemon server.js",
     "dev": "concurrently 'npm:dev:frontend' 'npm:dev:backend' ",
+    "start:prod":"NODE_ENV=production nodemon server.js ",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

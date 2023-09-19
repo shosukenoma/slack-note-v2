@@ -21,6 +21,13 @@ const deleteDocument = (model) =>
     next();
   });
 
+const getDocument = (model) =>
+  asyncWrapper(async (req, res, next) => {
+    const document = await model.findById(req.params.id);
+    res.status(200).json({ document });
+    next();
+  });
+
 const updateDocument = (model) =>
   asyncWrapper(async (req, res, next) => {
     const updatedDocument = await model.findByIdAndUpdate(
@@ -37,5 +44,6 @@ module.exports = {
   createDocument,
   getAllDocuments,
   deleteDocument,
+  getDocument,
   updateDocument,
 };
