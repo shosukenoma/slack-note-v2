@@ -13,6 +13,7 @@ function signIn(){
         <div>
             <h1>Sign-In Page</h1>
             <form>
+                <label></label>
                 <input type="text"></input>
                 <input type="text"></input>
             </form>

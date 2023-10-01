@@ -1,12 +1,12 @@
 const AppError = require("../utils/appError");
 
 const sendError = (err, req, res, next) => {
-  //Duplicate users
   let message = "Something went wrong";
+  //Duplicate users
   if (err.code === 11000) {
     message = `${Object.keys(err.keyValue)} is already taken`;
   }
-  //Invalid Ids
+  //Invalid Endpoints
   if (err.name === "CastError") {
     message = `${err.value} is not a valid ${err.path}`;
   }

@@ -11,7 +11,6 @@ const createDocument = (model) =>
   asyncWrapper(async (req, res, next) => {
     const newDocument = await model.create(req.body);
     res.status(200).json({ newDocument });
-    next();
   });
 
 const deleteDocument = (model) =>
