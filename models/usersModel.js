@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const AppError = require("../utils/appError");
 const validator = require("validator");
+const asyncWrapper = require("express-async-wrap");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -29,21 +30,11 @@ userSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 12);
 });
 
-// userSchema.post("save", async function () {
-//   const token = await promisify(jwt.sign)(
-//     { id: this._id },
-//     process.env.JWT_SECRET
-//   );
-// });
-
-userSchema.methods.correctPassword = async function (
+userSchema.methods.correctPassword = asyncWrapper(async function (
   userPassword,
-  hashedPassword
+  hashPassword
 ) {
-  const correct = await bcrypt.compare(userPassword, hashedPassword);
-  console.log(userPassword, hashedPassword);
-  if (!correct) return next(AppError("Incorrect password", 400));
-  return true;
-};
+  return await bcrypt.compare(userPassword, hashPassword);
+});
 
 module.exports = mongoose.model("User", userSchema);

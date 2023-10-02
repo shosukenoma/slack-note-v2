@@ -12,7 +12,6 @@ require("dotenv").config();
 
 app.use(express.static("./src"));
 app.use(express.json());
-app.use(cors());
 app.use("/api/v1/posts", posts);
 app.use("/api/v1/users", users);
 app.use(errors);
