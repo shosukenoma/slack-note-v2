@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-const { promisify } = require("util");
-const AppError = require("../utils/appError");
 const validator = require("validator");
 const asyncWrapper = require("express-async-wrap");
 
