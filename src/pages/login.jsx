@@ -1,9 +1,17 @@
 import axios from "axios"
-function Login(){
+import {Link} from 'react-router-dom'
+import {useState} from 'react'
 
-    async function userSignIn(id){
+function Login(){
+    const [errors,setErrors] = useState()
+
+    async function handleSubmit(){
         try {
-            const user = await axios.get(`/api/v1/users${id}`) 
+            const user = {
+                email:document.getElementById('email').value,
+                password:document.getElementById('password').value}
+            const {data} = await axios.post(`/api/v1/users/login`,user) 
+            setErrors(data.message)
         } catch (error) {
             console.log(error)
         }
@@ -13,11 +21,16 @@ function Login(){
         <div>
             <h1>Sign-In Page</h1>
             <form>
-                <label></label>
-                <input type="text"></input>
-                <input type="text"></input>
+                <label>Email Address:</label>
+                <input type="email" id="email"></input>
+                <label>Password:</label>
+                <input type="password" id='password' ></input>
             </form>
-            <button ahref='./signup'></button>
+            <p>
+                <Link to='/register'> Don't have an account?</Link>
+            </p>
+            <button onClick={handleSubmit}>Sign in</button>
+            <p>{errors}</p>
         </div>
     )
 }

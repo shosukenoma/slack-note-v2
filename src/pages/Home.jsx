@@ -3,6 +3,7 @@ import './../Home.css'
 import Post from '../Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 function Home() {
 
@@ -14,7 +15,7 @@ function Home() {
         b) adding new post */
     useEffect(() => {
       updateScroll()
-      // fetchData()
+      fetchData()
     }, [])
   
   function addPost(post) {  

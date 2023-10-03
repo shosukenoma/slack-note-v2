@@ -2,7 +2,7 @@ const asyncWrapper = require("express-async-wrap");
 const User = require("../models/usersModel");
 const AppError = require("../utils/appError");
 
-const signup = asyncWrapper(async (req, res) => {
+const register = asyncWrapper(async (req, res) => {
   const newUser = await User.create(req.body);
   const { email, profileName } = newUser;
   res.status(200).json({ data: { email, profileName } });
@@ -22,4 +22,4 @@ const login = asyncWrapper(async (req, res, next) => {
   return res.status(200).json({ status: "success" });
 });
 
-module.exports = { signup, login };
+module.exports = { register, login };
