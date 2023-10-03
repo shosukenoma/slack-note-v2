@@ -1,4 +1,3 @@
-// const morgan = require("morgan");
 const connectDB = require("./db/connect");
 const express = require("express");
 const asyncWrapper = require("express-async-wrap");
@@ -22,7 +21,6 @@ const start = asyncWrapper(async () => {
 
   app.listen(port, () => {
     console.log(`server is listening on ${port}`);
-    console.log(process.env.NODE_ENV);
   });
 });
 

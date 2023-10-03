@@ -1,5 +1,5 @@
 import axios from "axios"
-function signIn(){
+function Login(){
 
     async function userSignIn(id){
         try {
@@ -17,8 +17,9 @@ function signIn(){
                 <input type="text"></input>
                 <input type="text"></input>
             </form>
+            <button ahref='./signup'></button>
         </div>
     )
 }
 
-export default login
+export default Login

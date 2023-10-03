@@ -1,5 +1,5 @@
 import axios from "axios"
-function signup(){
+function Register(){
 
     async function registerUser(id){
         try {
@@ -23,4 +23,4 @@ function signup(){
     )
 }
 
-export default signup
+export default Register
