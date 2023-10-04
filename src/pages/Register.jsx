@@ -13,6 +13,8 @@ function Register(){
                 password:document.getElementById('password').value}
             const {data} = await axios.post(`/api/v1/users/register`,newUser) 
             setErrors(data.message)
+            errors ? document.getElementById('password').value = '': null
+
             
         } catch (error) {
             console.log(error)
@@ -32,7 +34,9 @@ function Register(){
                 <input type="password" id="password" required></input>
             </form>
             <Link to="/login">Already have and account?</Link>
-            <button onClick={handleSubmit}>Create account</button>
+            <Link to= '/'>
+                <button onClick={handleSubmit}>Create account</button>
+            </Link>
             <p>{errors}</p>
         </div>
     )

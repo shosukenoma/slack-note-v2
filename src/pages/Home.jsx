@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './../Home.css'
+import '../Home.css'
 import Post from '../Post'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import axios from 'axios';
@@ -15,7 +15,7 @@ function Home() {
         b) adding new post */
     useEffect(() => {
       updateScroll()
-      fetchData()
+      // fetchData()
     }, [])
   
   function addPost(post) {  

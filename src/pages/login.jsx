@@ -1,17 +1,27 @@
 import axios from "axios"
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useState} from 'react'
 
 function Login(){
-    const [errors,setErrors] = useState()
+    const [errors,setErrors] = useState('')
+    const [emailInput, setEmailInput] = useState('')
+    const [passwordInput, setPasswordInput] = useState('')
+    const navigate = useNavigate()
 
     async function handleSubmit(){
         try {
             const user = {
-                email:document.getElementById('email').value,
-                password:document.getElementById('password').value}
+                email:emailInput,
+                password:passwordInput}
             const {data} = await axios.post(`/api/v1/users/login`,user) 
             setErrors(data.message)
+            if(data.status =='success'){
+               navigate('/')
+            } else{
+                setPasswordInput('')
+                document.getElementById('password').value = ''
+            } 
+
         } catch (error) {
             console.log(error)
         }
@@ -22,9 +32,9 @@ function Login(){
             <h1>Sign-In Page</h1>
             <form>
                 <label>Email Address:</label>
-                <input type="email" id="email"></input>
+                <input type="email" onChange={e => setEmailInput(e.target.value)}></input>
                 <label>Password:</label>
-                <input type="password" id='password' ></input>
+                <input type="password" id='password' onChange={e => setPasswordInput(e.target.value)}></input>
             </form>
             <p>
                 <Link to='/register'> Don't have an account?</Link>
